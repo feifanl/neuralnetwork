@@ -1,5 +1,12 @@
 import math
-from Value import Value, Neuron
+import Value
+import Neuron
+
+def forward_pass():
+    pass
+
+def backward_pass():
+    pass
 
 def backprop(root):
     # Gradient of root with respect to root is just 1 
@@ -8,3 +15,6 @@ def backprop(root):
 # cross-entropy loss
 def loss(probs):
     return -math.log(probs[label])
+
+def accuracy():
+    pass
