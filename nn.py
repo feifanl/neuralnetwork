@@ -1,7 +1,7 @@
 import Layer
 
 class NN:
-    # nin is the input "layer", nouts is the sizes of every layer
+    # nin is the size of the input "layer", nouts is the sizes of every layer
     def __init__(self, nin, nouts):
         # append the input layer to the start
         nn = [nin] + nouts

@@ -86,8 +86,7 @@ class Value:
         res._backward = _backward
 
         return res
-
-    # Activation function
+    
     def tanh(self):
         x = self.v
         t = (math.exp(2 * x) - 1)/(math.exp(2 * x) + 1)
@@ -95,6 +94,29 @@ class Value:
 
         def _backward():
             self.grad += (1 - t ** 2) * res.grad
+
+        res._backward = _backward
+
+        return res
+    
+    # Using ReLU as activation function to avoid vanishing gradient problem (really large/really small inputs cause gradient of tanh to approach 0)
+    def relu(self): 
+        x = self.v if self.v > 0 else 0
+        res = Value(x, (self, ), "ReLU")
+
+        def _backward():
+            self.grad += (1 if x > 0 else 0) * res.grad
+        
+        res._backward = _backward
+
+        return res
+    
+    # Log function for loss 
+    def log(self):
+        res = Value(math.log(self.v), (self, ), "log")
+
+        def _backward():
+            self.grad += 1 / self.v * res.grad
 
         res._backward = _backward
 
