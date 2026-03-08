@@ -1,3 +1,3 @@
-class NN:
+class Layer: 
     def __init__(self):
         pass

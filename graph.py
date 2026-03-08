@@ -31,18 +31,3 @@ def draw_graph(root):
         graph.edge(str(id(node1)), str(id(node2)) + node2._op)
 
     return graph
-
-def topological_sort(root):
-    topo = []
-    visited = set()
-
-    def build_topo(value):
-        if value not in visited:
-            visited.add(value)
-            for child in value._prev:
-                build_topo(child)
-            # Only add once all of children are in
-            topo.append(value)
-    build_topo(root)
-
-    return topo
