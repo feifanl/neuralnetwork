@@ -64,6 +64,10 @@ class Value:
     # Can be represented as multiplication with 1/other
     def __truediv__(self, other):
         return self * other ** -1
+
+    # Same logic as radd
+    def __rtruediv__(self, other):
+        return self * other ** -1
     
     # Only if other is a scalar
     def __pow__(self, other):
