@@ -1,5 +1,8 @@
-import numpy as np
 import math
+
+# So pickle can find
+def _default_backward():
+    return None
 
 # Value class instead of scalars; backprop requires knowing operations and nodes that produced values
 class Value: 
@@ -7,7 +10,8 @@ class Value:
         self.v = v
         # Gradient initialized to 0
         self.grad = 0.0
-        self._backward = lambda: None
+
+        self._backward = _default_backward
 
         # Nodes that point to this one
         self._prev = set(_children)
@@ -41,7 +45,7 @@ class Value:
     
     # Same case as radd
     def __rsub__(self, other):
-        return self - other
+        return other - self
 
     def __mul__(self, other):
         # Handle case where other is not a Value object
@@ -67,7 +71,7 @@ class Value:
 
     # Same logic as radd
     def __rtruediv__(self, other):
-        return self * other ** -1
+        return other * self ** -1
     
     # Only if other is a scalar
     def __pow__(self, other):
