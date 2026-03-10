@@ -67,10 +67,10 @@ class Value:
     
     # Only if other is a scalar
     def __pow__(self, other):
-        res = Value(self.data ** other, (self, ), f'**{other}')
+        res = Value(self.v ** other, (self, ), f'**{other}')
 
         def _backward():
-            self.grad += other * self.data ** (other - 1) * res.grad
+            self.grad += other * self.v ** (other - 1) * res.grad
 
         res._backward = _backward
         

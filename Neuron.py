@@ -1,6 +1,5 @@
-import numpy as np
 import random
-import Value
+from Value import Value
 
 # Neuron class to hold the weights, bias, and value of each neuron
 class Neuron:
@@ -12,4 +11,7 @@ class Neuron:
     def __call__(self, x): 
         activation = sum(weight * value for weight, value in zip(self.weights, x)) + self.bias
         
-        return activation.tanh()
+        return activation.relu()
+    
+    def get_params(self):
+        return self.weights + [self.bias]

@@ -1,4 +1,4 @@
-import Layer
+from Layer import Layer
 
 class NN:
     # nin is the size of the input "layer", nouts is the sizes of every layer
@@ -11,3 +11,14 @@ class NN:
         for layer in self.layers:
             x = layer(x)
         return x
+    
+    def get_params(self):
+        params = []
+        for layer in self.layers:
+            params.extend(layer.get_params())
+
+        return params
+    
+    def grad_descent(self, lr):
+        for param in self.get_params():
+            param.v -= lr * param.grad
